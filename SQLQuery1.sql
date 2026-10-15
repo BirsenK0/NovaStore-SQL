@@ -125,3 +125,10 @@ FROM Categories cat
 LEFT JOIN Products p ON cat.CategoryID = p.CategoryID
 GROUP BY cat.CategoryName;
 
+--BOLUM 3: Soru 5 -> Her Müşterinin toplam cirosu
+SELECT c.CustomerID,c.FullName, SUM(o.TotalAmount) AS ToplamCiro
+FROM Customers c
+INNER JOIN Orders o ON c.CustomerID = o.CustomerID
+GROUP BY c.customerID, c.FullName
+ORDER BY ToplamCiro DESC;
+
