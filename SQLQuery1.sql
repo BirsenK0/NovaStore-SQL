@@ -136,3 +136,20 @@ ORDER BY ToplamCiro DESC;
 SELECT OrderID, OrderDate, DATEDIFF(DAY, OrderDate, GETDATE()) AS GecenGun
 FROM Orders
 ORDER BY OrderDate DESC;
+
+
+--BOLUM 4: Gorev 1 -> Siparis Ozeti View
+GO
+CREATE VIEW vw_SiparisOzet AS
+SELECT c.FullName AS MusteriAdi, o.orderDate AS SiparisTarihi,
+	   p.ProductName AS UrunAdi, od.Quantity AS Adet
+FROM Customers c
+INNER JOIN Orders o ON c.CustomerID = o.CustomerID
+INNER JOIN OrderDetails od ON o.orderID = od.OrderID
+INNER JOIN Products p ON od.ProductID = p.ProductID;
+GO
+SELECT * FROM vw_SiparisOzet;
+
+--BOLUM 4: Gorev 2 -> Veri tabani yedegi
+BACKUP DATABASE NovaStoreDB
+TO DISK = 'C:\Yedek\NovaStoreDB.bak';
