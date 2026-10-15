@@ -132,3 +132,7 @@ INNER JOIN Orders o ON c.CustomerID = o.CustomerID
 GROUP BY c.customerID, c.FullName
 ORDER BY ToplamCiro DESC;
 
+--BOLUM 3: Soru 6-> Siparişlerin kaç gün önce verildiği
+SELECT OrderID, OrderDate, DATEDIFF(DAY, OrderDate, GETDATE()) AS GecenGun
+FROM Orders
+ORDER BY OrderDate DESC;
